@@ -4,8 +4,10 @@ const API_BASE = "http://localhost:3001";
 
 export async function fetchEmployees(): Promise<Employee[]> {
   try {
+    const isProd = import.meta.env.PROD;
+    console.log({ isProd });
     // In production, skip the network request entirely and use local data
-    if (import.meta.env.PROD) {
+    if (isProd) {
       const data = await import("../data/employees.json");
       return data.default as Employee[];
     }
